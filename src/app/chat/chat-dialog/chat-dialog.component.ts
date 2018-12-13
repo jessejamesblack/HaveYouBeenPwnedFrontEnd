@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatService, Message } from '../../chat.service';
+import { ChatService, Message, Content } from '../../chat.service';
 import { Observable } from 'rxjs';
 import { scan } from "rxjs/operators";
+
 
 
 @Component({
@@ -12,6 +13,7 @@ import { scan } from "rxjs/operators";
 export class ChatDialogComponent implements OnInit {
   messages: Observable<Message[]>;
   formValue: string;
+  locations: Content[]=[];
 
   constructor(public chat: ChatService) {}
 
@@ -20,6 +22,7 @@ export class ChatDialogComponent implements OnInit {
     this.messages = this.chat.conversation
       .asObservable()
       .pipe(scan((acc, val) => acc.concat(val)));
+    this.locations = this.chat.locationsFound;
   }
 
   sendMessage() {

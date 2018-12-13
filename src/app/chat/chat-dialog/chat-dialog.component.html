@@ -1,20 +1,60 @@
-<br>
-<br>
-<ng-container *ngFor="let message of messages | async">
+<div class="col-sm-4 DivToScroll DivWithScroll top border border-bottom-0">
+  <div>
+    <ng-container *ngFor="let message of (messages | async)">
+      <div class="float-right" *ngIf="message.sentBy === 'user'">
+        <img src="assets/person.jpg" height="42" width="42" />
+      </div>
+      <br />
+      <br />
+      <br />
+      <div
+        *ngIf="message.sentBy === 'user'"
+        class="message"
+        [ngClass]="{ from: message.sentBy === 'user' }"
+      >
+        {{ message.content }}
+      </div>
 
-  <div class="message" [ngClass]="{ 'from': message.sentBy === 'bot',
-                                    'to':   message.sentBy === 'user' }">
-    {{ message.content }}
+      <div *ngIf="message.sentBy === 'bot'">
+        <div *ngIf="locations.length > 0; else: chatMsg">
+          <a href="https://www.verizonwireless.com/" target="_blank">
+            <img src="assets/bot.jpg" height="42" width="42" />
+          </a>
+          <div *ngFor="let loc of locations">
+            <div class="return">
+              <span>
+                Addresss:
+                <a
+                  href="http://www.google.com/maps/place/{{loc.address}}"
+                  target="_blank"
+                >
+                  {{ loc.address }}</a
+                >
+              </span>
+              <br />
+              <span>Distance: {{ loc.distance }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #chatMsg>
+        <div class="message">{{ message.content }}</div>
+      </ng-template>
+    </ng-container>
   </div>
+</div>
 
-</ng-container>
-
-
-<label for="nameField">Your Message</label>
-
-<div class="input-group">
-  <input class="form-control width100" [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text">
-  <span class="input-group-btn">
-    <button class=" btn btn-dark" (click)="sendMessage()">Send</button>
-  </span>
+<div class="col-sm-4 border border-top-0">
+  <label for="nameField">Your Message</label>
+  <div class="input-group">
+    <input
+      class="form-control width100"
+      [(ngModel)]="formValue"
+      (keyup.enter)="sendMessage()"
+      type="text"
+    />
+    <span class="input-group-btn">
+      <button class=" btn btn-dark" (click)="sendMessage()">Send</button>
+    </span>
+  </div>
 </div>

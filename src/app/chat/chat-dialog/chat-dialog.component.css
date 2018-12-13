@@ -4,23 +4,45 @@
   padding: 15px 20px;
   position: relative;
   font-weight: bold;
-}
-
-.message.to {
-  background-color: #2095FE;
-  color: rgb(0, 0, 0);
   margin-left: 100px;
   text-align: right;
+  background-color: #2095fe;
+  color: #fff;
 }
 
-.message.from {
-  background-color: rgb(24, 24, 24);
-  color: #ffffff;
+.return {
+  border-radius: 50px;
+  margin: 0 15px 10px;
+  padding: 15px 20px;
+  position: relative;
+  font-weight: bold;
+  background-color: #e5e4e9;
+  color: #363636;
   margin-right: 100px;
-
 }
 
-.message.to+.message.to,
-.message.from+.message.from {
-  margin-top: -10px;
+.DivToScroll {
+  border-radius: 4px 0 4px 0;
+  color: #3b3c3e;
+  font-size: 12px;
+  font-weight: bold;
+  left: -1px;
+  padding: 10px 7px 5px;
+}
+
+.DivWithScroll {
+  height: 500px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.top {
+  position: relative;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 500px;
 }
