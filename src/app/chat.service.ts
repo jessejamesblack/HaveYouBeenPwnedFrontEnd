@@ -12,7 +12,7 @@ export class Message {
 }
 
 export class Content {
-  constructor(public address: string, public distance: string) { }
+  constructor(public address: string, public distance: string, public photo_reference: string) { }
 }
 
 @Injectable()
@@ -52,7 +52,7 @@ export class ChatService {
       if (speech[i] == "\n") {
         var obj = JSON.parse(content);
         console.log(obj);
-        var location = new Content(obj.address, obj.distance);
+        var location = new Content(obj.address, obj.distance, obj.photo_reference);
         total += 1;
         this.addNearby(location, total);
         content = '';
