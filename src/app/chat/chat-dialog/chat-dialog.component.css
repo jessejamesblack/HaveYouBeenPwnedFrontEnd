@@ -46,3 +46,13 @@
   left: 0;
   width: 500px;
 }
+/* .message.from {
+  background-color: #E5E4E9;
+  color: #363636;
+  margin-right: 100px;
+
+}
+.message.to + .message.to,
+.message.from + .message.from {
+margin-top: -10px;
+} */

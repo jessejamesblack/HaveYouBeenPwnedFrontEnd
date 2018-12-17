@@ -1,4 +1,4 @@
-<div class="col-sm-4 DivToScroll DivWithScroll top border border-bottom-0">
+<div class="col-sm-4 DivToScroll DivWithScroll top border border-bottom-0" #scrollMe>
   <div>
     <ng-container *ngFor="let message of (messages | async)">
       <div class="float-right" *ngIf="message.sentBy === 'user'">
@@ -10,7 +10,10 @@
       <div
         *ngIf="message.sentBy === 'user'"
         class="message"
-        [ngClass]="{ from: message.sentBy === 'user' }"
+        [ngClass]="{
+          from: message.sentBy === 'user',
+          from: message.sentBy === 'bot'
+        }"
       >
         {{ message.content }}
       </div>
@@ -55,6 +58,11 @@
     />
     <span class="input-group-btn">
       <button class=" btn btn-dark" (click)="sendMessage()">Send</button>
+    </span>
+    <span class="input-group-btn float-right">
+      <button class=" btn btn-primary" (click)="storesNearMe()">
+        Find stores near me
+      </button>
     </span>
   </div>
 </div>
