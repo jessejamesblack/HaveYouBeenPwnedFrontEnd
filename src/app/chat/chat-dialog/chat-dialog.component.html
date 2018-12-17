@@ -1,67 +1,84 @@
-<div class="col-sm-4 DivToScroll DivWithScroll top border border-bottom-0" #scrollMe>
-  <div>
-    <ng-container *ngFor="let message of (messages | async)">
-      <div class="float-right" *ngIf="message.sentBy === 'user'">
-        <img src="assets/person.jpg" height="42" width="42" />
-      </div>
-      <br />
-      <br />
-      <br />
-      <div
-        *ngIf="message.sentBy === 'user'"
-        class="message"
-        [ngClass]="{
-          from: message.sentBy === 'user',
-          from: message.sentBy === 'bot'
-        }"
-      >
-        {{ message.content }}
-      </div>
+<button
+  *ngIf="!isOn"
+  class="btn btn-primary fixed-bottom float-left"
+  (click)="chatWithBot()"
+>
+  Chat
+</button>
+<div *ngIf="isOn" class="col-sm-4 top">
+  <button class="btn btn-primary float-left" (click)="storesNearMe()">
+    Find stores near me
+  </button>
+  <button class="btn btn-danger float-right" (click)="chatWithBot()">
+    Close chat
+  </button>
+</div>
+<div *ngIf="isOn">
+  <div
+    class="col-sm-4 DivToScroll DivWithScroll top border border-bottom-0"
+    #scrollMe
+  >
+    <div>
+      <ng-container *ngFor="let message of (messages | async)">
+        <div class="float-right" *ngIf="message.sentBy === 'user'">
+          <img src="assets/person.jpg" height="42" width="42" />
+        </div>
+        <br />
+        <br />
+        <br />
+        <div
+          *ngIf="message.sentBy === 'user'"
+          class="message"
+          [ngClass]="{
+            from: message.sentBy === 'user',
+            from: message.sentBy === 'bot'
+          }"
+        >
+          {{ message.content }}
+        </div>
 
-      <div *ngIf="message.sentBy === 'bot'">
-        <div *ngIf="locations.length > 0; else: chatMsg">
-          <a href="https://www.verizonwireless.com/" target="_blank">
-            <img src="assets/bot.jpg" height="42" width="42" />
-          </a>
-          <div *ngFor="let loc of locations">
-            <div class="return">
-              <span>
-                Addresss:
-                <a
-                  href="http://www.google.com/maps/place/{{loc.address}}"
-                  target="_blank"
-                >
-                  {{ loc.address }}</a
-                >
-              </span>
-              <br />
-              <span>Distance: {{ loc.distance }}</span>
+        <div *ngIf="message.sentBy === 'bot'">
+          <div *ngIf="locations.length > 0; else: chatMsg">
+            <a href="https://www.verizonwireless.com/" target="_blank">
+              <img src="assets/bot.jpg" height="42" width="42" />
+            </a>
+            <div *ngFor="let loc of locations">
+              <div class="return">
+                <span>
+                  Addresss:
+                  <a
+                    href="http://www.google.com/maps/place/{{loc.address}}"
+                    target="_blank"
+                  >
+                    {{ loc.address }}</a
+                  >
+                </span>
+                <br />
+                <span>Distance: {{ loc.distance }}</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <ng-template #chatMsg>
-        <div class="message">{{ message.content }}</div>
-      </ng-template>
-    </ng-container>
+        <ng-template #chatMsg>
+          <div class="message">{{ message.content }}</div>
+        </ng-template>
+      </ng-container>
+    </div>
   </div>
-</div>
 
-<div class="col-sm-4 border border-top-0">
-  <label for="nameField">Your Message</label>
-  <div class="input-group">
-    <input
-      class="form-control width100"
-      [(ngModel)]="formValue"
-      (keyup.enter)="sendMessage()"
-      type="text"
-    />
-    <span class="input-group-btn">
-      <button class=" btn btn-dark" (click)="sendMessage()">Send</button>
-    </span>
-    <span class="input-group-btn float-right">
-      <button class=" btn btn-primary" (click)="storesNearMe()">
-        Find stores near me
+  <div class="col-sm-4 border border-top-0">
+    <label for="nameField">Your Message</label>
+    <div class="input-group">
+      <input
+        class="form-control width100"
+        [(ngModel)]="formValue"
+        (keyup.enter)="sendMessage()"
+        type="text"
+      />
+    </div>
+    <span class="input-group-btn col-sm-4">
+      <button class="btn btn-dark btn-lg btn-block" (click)="sendMessage()">
+        Send
       </button>
     </span>
   </div>

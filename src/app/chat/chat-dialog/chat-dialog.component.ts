@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  AfterViewChecked
+} from "@angular/core";
 import { ChatService, Message, Content } from "../../chat.service";
 import { Observable } from "rxjs";
 import { scan } from "rxjs/operators";
@@ -9,11 +15,12 @@ import { scan } from "rxjs/operators";
   styleUrls: ["./chat-dialog.component.css"]
 })
 export class ChatDialogComponent implements OnInit, AfterViewChecked {
-  @ViewChild('target') elemRef: ElementRef;
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+  @ViewChild("target") elemRef: ElementRef;
+  @ViewChild("scrollMe") private myScrollContainer: ElementRef;
   messages: Observable<Message[]>;
   formValue: string;
   locations: Content[] = [];
+  isOn: Boolean = false;
 
   constructor(public chat: ChatService) {}
 
@@ -22,12 +29,15 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
     this.messages = this.chat.conversation
       .asObservable()
       .pipe(scan((acc, val) => acc.concat(val)));
-    this.locations = this.chat.locationsFound;  
+    this.locations = this.chat.locationsFound;
     this.scroll();
   }
-  ngAfterViewChecked() {        
-    this.scroll();        
-} 
+  ngAfterViewChecked() {
+    this.scroll();
+  }
+  chatWithBot(){
+    this.isOn = !this.isOn;
+  }
   sendMessage() {
     this.chat.converse(this.formValue);
     this.formValue = "";
@@ -39,11 +49,11 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
     this.formValue = "";
     this.scroll();
   }
-  scroll(){
+  scroll() {
     // console.log(this.elemRef.nativeElement.innerHTML);
     // this.elemRef.nativeElement.scrollIntoView({ behavior: 'smooth' });
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-  } catch(err) { } 
+    } catch (err) {}
   }
 }
