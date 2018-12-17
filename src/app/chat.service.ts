@@ -8,11 +8,16 @@ import { BehaviorSubject } from "rxjs";
 
 // Message class for displaying messages in the component
 export class Message {
-  constructor(public content: string, public sentBy: string) { }
+  constructor(public content: string, public sentBy: string) {}
 }
 
 export class Content {
-  constructor(public address: string, public distance: string, public photo_reference: string) { }
+  constructor(
+    public address: string,
+    public distance: string,
+    public photo_reference: string,
+    public open_now: boolean
+  ) {}
 }
 
 @Injectable()
@@ -24,7 +29,9 @@ export class ChatService {
 
   locationsFound: Content[] = [];
 
-  constructor() { }
+  isOpen: boolean = false;
+
+  constructor() {}
 
   // Sends and receives messages via DialogFlow
   converse(msg: string) {
@@ -45,17 +52,27 @@ export class ChatService {
     this.conversation.next([msg]);
   }
 
-  retrieveLocations(speech : any) {
-    var content = '';
+  retrieveLocations(speech: any) {
+    var content = "";
     var total = 0;
     for (var i = 0; i < speech.length; i++) {
       if (speech[i] == "\n") {
         var obj = JSON.parse(content);
         console.log(obj);
-        var location = new Content(obj.address, obj.distance, obj.photo_reference);
+        var location = new Content(
+          obj.address,
+          obj.distance,
+          obj.photo_reference,
+          obj.open_now
+        );
+        if (obj.open_now == "true") {
+          this.isOpen = true;
+        } else {
+          this.isOpen = false;
+        }
         total += 1;
         this.addNearby(location, total);
-        content = '';
+        content = "";
       } else {
         content += speech[i];
       }

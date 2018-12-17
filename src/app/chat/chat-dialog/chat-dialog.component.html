@@ -54,7 +54,9 @@
                   >
                 </span>
                 <br />
-                <span>Distance: {{ loc.distance }}</span>
+                <span>Distance: {{ loc.distance }}</span> <br />
+                <div *ngIf="chat.isOpen; else: closed">Open now!</div>
+                <ng-template #closed> Closed! </ng-template>
                 <img
                   src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{loc.photo_reference}}&key=AIzaSyCrAI0t16uFey968ug2LKydc7NBqGOIkIQ"
                 />

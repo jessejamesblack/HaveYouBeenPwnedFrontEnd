@@ -35,7 +35,7 @@ export class ChatDialogComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked() {
     this.scroll();
   }
-  chatWithBot(){
+  chatWithBot() {
     this.isOn = !this.isOn;
   }
   sendMessage() {
