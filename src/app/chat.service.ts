@@ -45,7 +45,7 @@ export class ChatService {
     this.conversation.next([msg]);
   }
 
-  retrieveLocations(speech) {
+  retrieveLocations(speech : any) {
     var content = '';
     var total = 0;
     for (var i = 0; i < speech.length; i++) {

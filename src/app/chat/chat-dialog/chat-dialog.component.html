@@ -1,11 +1,11 @@
 <button
-  *ngIf="!isOn"
+  *ngIf="isOn"
   class="btn btn-primary fixed-bottom float-left"
   (click)="chatWithBot()"
 >
   Chat
 </button>
-<div *ngIf="isOn" class="col-sm-4 top">
+<div *ngIf="!isOn" class="col-sm-4 top">
   <button class="btn btn-primary float-left" (click)="storesNearMe()">
     Find stores near me
   </button>
@@ -13,7 +13,7 @@
     Close chat
   </button>
 </div>
-<div *ngIf="isOn">
+<div *ngIf="!isOn">
   <div
     class="col-sm-4 DivToScroll DivWithScroll top border border-bottom-0"
     #scrollMe
@@ -55,7 +55,9 @@
                 </span>
                 <br />
                 <span>Distance: {{ loc.distance }}</span>
-                <img src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{loc.photo_reference}}&key=AIzaSyCrAI0t16uFey968ug2LKydc7NBqGOIkIQ"/>
+                <img
+                  src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{loc.photo_reference}}&key=AIzaSyCrAI0t16uFey968ug2LKydc7NBqGOIkIQ"
+                />
               </div>
             </div>
           </div>
