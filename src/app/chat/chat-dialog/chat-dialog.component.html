@@ -38,16 +38,16 @@
         </div>
 
         <div *ngIf="message.sentBy === 'bot'">
-          <div *ngIf="locations.length > 0; else: chatMsg">
+          <div *ngIf="locations.length > 0; else chatMsg">
             <a href="https://www.verizonwireless.com/" target="_blank">
               <img src="assets/bot.jpg" height="42" width="42" />
             </a>
             <div *ngFor="let loc of locations">
               <div class="return">
                 <span>
-                  Addresss:
+                  Address:
                   <a
-                    href="http://www.google.com/maps/place/{{loc.address}}"
+                    href="http://www.google.com/maps/place/{{ loc.address }}"
                     target="_blank"
                   >
                     {{ loc.address }}</a
@@ -55,10 +55,11 @@
                 </span>
                 <br />
                 <span>Distance: {{ loc.distance }}</span> <br />
-                <div *ngIf="chat.isOpen; else: closed">Open now!</div>
-                <ng-template #closed> Closed! </ng-template>
+                <div>{{ loc.open_now }}</div>
                 <img
-                  src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{loc.photo_reference}}&key=AIzaSyCrAI0t16uFey968ug2LKydc7NBqGOIkIQ"
+                  src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{
+                    loc.photo_reference
+                  }}&key=AIzaSyCrAI0t16uFey968ug2LKydc7NBqGOIkIQ"
                 />
               </div>
             </div>

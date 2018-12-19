@@ -16,7 +16,7 @@ export class Content {
     public address: string,
     public distance: string,
     public photo_reference: string,
-    public open_now: boolean
+    public open_now: string
   ) {}
 }
 
@@ -66,9 +66,9 @@ export class ChatService {
           obj.open_now
         );
         if (obj.open_now == "true") {
-          this.isOpen = true;
-        } else {
-          this.isOpen = false;
+          location.open_now = "Open!";
+        } else if (obj.open_now == "false"){
+          location.open_now = "Closed!";
         }
         total += 1;
         this.addNearby(location, total);
