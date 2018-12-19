@@ -29,8 +29,6 @@ export class ChatService {
 
   locationsFound: Content[] = [];
 
-  isOpen: boolean = false;
-
   constructor() {}
 
   // Sends and receives messages via DialogFlow
@@ -67,7 +65,7 @@ export class ChatService {
         );
         if (obj.open_now == "true") {
           location.open_now = "Open!";
-        } else if (obj.open_now == "false"){
+        } else {
           location.open_now = "Closed!";
         }
         total += 1;

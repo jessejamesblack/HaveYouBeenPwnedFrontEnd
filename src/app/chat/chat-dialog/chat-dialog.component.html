@@ -1,3 +1,4 @@
+<br>
 <button
   *ngIf="isOn"
   class="btn btn-primary fixed-bottom float-left"
@@ -56,11 +57,16 @@
                 <br />
                 <span>Distance: {{ loc.distance }}</span> <br />
                 <div>{{ loc.open_now }}</div>
-                <img
-                  src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{
-                    loc.photo_reference
-                  }}&key=AIzaSyCrAI0t16uFey968ug2LKydc7NBqGOIkIQ"
-                />
+                <a
+                  href="http://www.google.com/maps/place/{{ loc.address }}"
+                  target="_blank"
+                  ><img
+                    src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={{
+                      loc.photo_reference
+                    }}&key=AIzaSyCrAI0t16uFey968ug2LKydc7NBqGOIkIQ"
+                    class="img-responsive img-rounded"
+                    alt="Image of the store could not load"
+                /></a>
               </div>
             </div>
           </div>
